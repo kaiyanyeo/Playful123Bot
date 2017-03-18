@@ -18,6 +18,11 @@ const chatBotName = 'Playful123Bot';
 log.info(`My chatbot: ${chatBotName}`);
 log.info(`current environment: ${process.env.NODE_ENV}`);
 
+// in production
+if(process.env.NODE_ENV === 'production'){
+	server.post('/api/messages', botConnector.listen());
+}
+
 // From Microsoft framework
 const bot = new botbuilder.UniversalBot(botConnector.listen());
 
