@@ -15,7 +15,15 @@ const log = bunyan.createLogger({
 /* End of bootstrap code */
 
 const chatBotName = 'Playful123Bot';
-log.info(`My chatbot: ${Playful123Bot}`);
+log.info(`My chatbot: ${chatBotName}`);
+log.info(`current environment: ${process.env.NODE_ENV}`);
+
+// From Microsoft framework
+const bot = new botbuilder.UniversalBot(botConnector.listen());
+
+bot.dialog('/', function(session) {
+	session.send('hello');
+})
 
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
