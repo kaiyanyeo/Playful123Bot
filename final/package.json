@@ -1,0 +1,33 @@
+{
+  "name": "bot-skeleton",
+  "version": "1.0.0",
+  "description": "An attempt at a chat bot",
+  "repository": "https://github.com/li-kai/studious-potato",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src --exec \"node --require dotenv/config --require babel-register\" | bunyan -o short",
+    "start": "node build",
+    "build": "rimraf build && babel src --out-dir=build --copy-files --node-env production",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "You!",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.8.0",
+    "babel-eslint": "^7.0.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015-node6": "^0.4.0",
+    "babel-preset-stage-3": "^6.5.0",
+    "babel-register": "^6.24.0",
+    "botbuilder": "^3.7.0",
+    "bunyan": "^1.8.8",
+    "express": "^4.15.2",
+    "recastai": "^2.3.0",
+    "rimraf": "^2.5.4"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "nodemon": "^1.11.0"
+  }
+}
