@@ -14,7 +14,7 @@ const log = bunyan.createLogger({
 });
 /* End of bootstrap code */
 
-const chatBotName = 'Studious Potato';
+const chatBotName = 'Playful123Bot';
 
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
