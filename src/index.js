@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import bunyan from 'bunyan';
 import express from 'express';
 import botbuilder from 'botbuilder';
+import { Client } from 'recastai';
 
 import config from './config';
 import botConnector from './botConnector';
@@ -24,9 +25,21 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 // From Microsoft framework
-const bot = new botbuilder.UniversalBot(botConnector.listen());
+const bot = new botbuilder.UniversalBot(botConnector);
+const recastClient = new Client(config.recastToken);
 
-bot.dialog('/', [
+bot.dialog('/', (session) => {
+	log.info(`received message: '${session.message.text}'`);
+	recastClient.textConverse(session.message.text)
+	.then(function(res) {
+		const reply = res.reply();
+		session.send(reply);
+	})
+	.catch((error) => {
+		log.error(error);
+	});
+});
+	/*[
 	function(session, args, next) {
 		if(!session.userData.name) {
 			// no user data, begin dialog under this path
@@ -39,7 +52,7 @@ bot.dialog('/', [
 		// have user data
 		session.send(`Hello ${session.userData.name}, I'm ${chatBotName}!`);
 	}
-]);
+]); */
 
 bot.dialog('/profile', [
 	function(session) {
